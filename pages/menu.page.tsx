@@ -3,7 +3,8 @@ import Head from "next/head";
 import Image from "next/image";
 import { gql } from "@apollo/client";
 import styles from "../styles/Home.module.css";
-import client from "../apollo-client";
+import client from "../apollo/client";
+import { Menu } from "./api/graphql/resolvers/types";
 
 interface Country {
   code: string;
@@ -11,11 +12,8 @@ interface Country {
   emoji: string;
 }
 
-const Home: NextPage<{ countries: Country[] }> = ({
-  countries,
-}: {
-  countries: Country[];
-}) => {
+const Menu: NextPage<{ menu: Menu }> = ({ menu }: { menu: Menu }) => {
+  const { drinks } = menu;
   return (
     <div className={styles.container}>
       <main className={styles.main}>
@@ -27,8 +25,8 @@ const Home: NextPage<{ countries: Country[] }> = ({
         </p>
 
         <div className={styles.grid}>
-          {countries.map((country) => (
-            <div key={country.code} className={styles.card}>
+          {drinks.map((drink) => (
+            <div key={drink.id} className={styles.card}>
               <h3>
                 <a
                   href="#country-name"
@@ -50,10 +48,10 @@ const Home: NextPage<{ countries: Country[] }> = ({
                     ></path>
                   </svg>
                 </a>
-                {country.name}
+                {drink.name}
               </h3>
               <p>
-                {country.code} - {country.emoji}
+                {drink.id} - {drink.name}
               </p>
             </div>
           ))}
@@ -76,16 +74,26 @@ const Home: NextPage<{ countries: Country[] }> = ({
   );
 };
 
-export default Home;
+export default Menu;
 
 export async function getStaticProps() {
   const { data } = await client.query({
     query: gql`
-      query Countries {
-        countries {
-          code
-          name
-          emoji
+      query Menu {
+        menu {
+          drinks {
+            name
+            price
+            measurements {
+              ingredient {
+                name
+              }
+              measureFlOz
+              variant {
+                name
+              }
+            }
+          }
         }
       }
     `,
@@ -93,7 +101,7 @@ export async function getStaticProps() {
 
   return {
     props: {
-      countries: data.countries.slice(0, 4),
+      menu: data.menu,
     },
   };
 }

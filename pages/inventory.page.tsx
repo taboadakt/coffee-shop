@@ -3,7 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { gql } from "@apollo/client";
 import styles from "../styles/Home.module.css";
-import client from "../apollo-client";
+import client from "../apollo/client";
 
 interface Country {
   code: string;

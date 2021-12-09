@@ -1,7 +1,7 @@
-import { Drink } from "../types";
+import { Menu, Drink } from "../types";
 import { ingredientCatalog } from "../ingredientCatalog";
 
-export const menu = (): Drink[] => {
+const drinks = (): Drink[] => {
   return [
     {
       id: "latte",
@@ -31,4 +31,9 @@ export const menu = (): Drink[] => {
       ],
     },
   ];
+};
+export const menu = (): Menu => {
+  return {
+    drinks: drinks(),
+  };
 };

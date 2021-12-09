@@ -1,14 +1,18 @@
 import { gql } from "apollo-server-micro";
 
 export const typeDefs = gql`
+  type Query {
+    menu: Menu
+    inventory: [IngredientInventory]
+  }
+
+  type Menu {
+    drinks: [Drink]!
+  }
+
   type Variant {
     id: ID!
     name: String!
-  }
-
-  type Query {
-    menu: [Drink]
-    inventory: [IngredientInventory]
   }
 
   type Ingredient {

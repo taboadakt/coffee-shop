@@ -3,6 +3,10 @@ export type Ingredient = {
   name: string;
 };
 
+export type Menu = {
+  drinks: Drink[];
+};
+
 export type Variant = {
   id: string;
   name: string;

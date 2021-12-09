@@ -1,5 +1,4 @@
-export { menuSchemas } from "./schemaTypes";
-import { Drink } from "./types";
+import { Drink } from "../types";
 
 export const menu = (): Drink[] => {
   return [

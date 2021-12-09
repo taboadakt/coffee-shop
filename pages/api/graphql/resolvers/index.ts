@@ -1,13 +1,4 @@
-import { gql } from "apollo-server-micro";
-import { menu, menuSchemas } from "./menu";
-
-export const typeDefs = gql`
-  type Query {
-    menu: [Drink]
-  }
-
-  ${menuSchemas}
-`;
+import { menu } from "./menu";
 
 const resolvers = {
   Query: {

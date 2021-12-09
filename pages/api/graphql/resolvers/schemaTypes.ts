@@ -6,6 +6,24 @@ export const typeDefs = gql`
     inventory: [IngredientInventory]
   }
 
+  type Mutation {
+    orderDrink(input: OrderDrinkInput): Boolean
+    updateStock(input: UpdateStockInput): UpdateStockPayload
+  }
+
+  input OrderDrinkInput {
+    id: ID!
+  }
+
+  input UpdateStockInput {
+    id: ID!
+    measureFlOz: Float!
+  }
+
+  type UpdateStockPayload {
+    remainingStock: Float!
+  }
+
   type Menu {
     drinks: [Drink]!
   }
@@ -21,12 +39,13 @@ export const typeDefs = gql`
   }
 
   type IngredientInventory {
-    ingredient: Ingredient!
+    id: ID!
+    name: String!
     stockFlOz: Float!
   }
 
   type Measurement {
-    ingredient: Ingredient!
+    ingredientId: String!
     measureFlOz: Float!
     variant: Variant
   }

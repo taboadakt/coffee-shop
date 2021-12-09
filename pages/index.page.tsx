@@ -1,0 +1,32 @@
+import type { NextPage } from "next";
+import Head from "next/head";
+import Link from "next/link";
+import styles from "../styles/Home.module.css";
+
+const MOTTO = "More espresso less depresso";
+
+const Home: NextPage = () => {
+  return (
+    <div className={styles.container}>
+      <Head>
+        <title>Coffee Shop</title>
+        <meta name="description" content={MOTTO} />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
+      <main className={styles.main}>
+        <h1 className={styles.title}>Welcome to the Coffee Shop</h1>
+        <p>{MOTTO}</p>
+
+        <Link href="/inventory">
+          <a>See your inventory</a>
+        </Link>
+        <Link href="/menu">
+          <a>See your menu</a>
+        </Link>
+      </main>
+    </div>
+  );
+};
+
+export default Home;

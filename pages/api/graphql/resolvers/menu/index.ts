@@ -1,4 +1,5 @@
 import { Drink } from "../types";
+import { ingredientCatalog } from "../ingredientCatalog";
 
 export const menu = (): Drink[] => {
   return [
@@ -6,21 +7,26 @@ export const menu = (): Drink[] => {
       id: "latte",
       name: "Latte",
       price: 8.99,
-      ingredients: [
+      measurements: [
         {
-          id: "milk-foam",
-          name: "Milk foam",
-          amountFlOz: 0.7,
+          ingredient: ingredientCatalog.milk,
+          measureFlOz: 0.7,
+          variant: {
+            id: "milkFoam",
+            name: "Milk foam",
+          },
         },
         {
-          id: "steamed-milk",
-          name: "Steamed milk",
-          amountFlOz: 10,
+          ingredient: ingredientCatalog.milk,
+          measureFlOz: 10,
+          variant: {
+            id: "steamedMilk",
+            name: "Steamed milk",
+          },
         },
         {
-          id: "espresso",
-          name: "Espresso",
-          amountFlOz: 2,
+          ingredient: ingredientCatalog.espresso,
+          measureFlOz: 2,
         },
       ],
     },

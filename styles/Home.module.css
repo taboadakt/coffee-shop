@@ -3,7 +3,6 @@
 }
 
 .main {
-  min-height: 100vh;
   padding: 4rem 0;
   flex: 1;
   display: flex;
@@ -43,11 +42,6 @@
   margin: 0;
   line-height: 1.15;
   font-size: 4rem;
-}
-
-.title,
-.description {
-  text-align: center;
 }
 
 .description {
@@ -107,6 +101,14 @@
 .logo {
   height: 1em;
   margin-left: 0.5rem;
+}
+
+.columnContainer {
+  flex-direction: column;
+}
+
+.menuLeft {
+  margin-right: 20%;
 }
 
 @media (max-width: 600px) {

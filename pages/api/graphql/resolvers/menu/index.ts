@@ -48,28 +48,13 @@ export const orderDrink = async (
   );
   if (!myDrink) throw new Error("Pick a drink on the menu please");
 
+  // Too lazy to set up queuing so we're going serial
   for (let i = 0; i < myDrink.measurements.length; i++) {
     const measurement = myDrink.measurements[i];
-    // console.log({
-    //   id: measurement.ingredientId,
-    //   measureFlOz: measurement.measureFlOz,
-    // });
-    const remaining = await db.updateStock({
+    await db.updateStock({
       id: measurement.ingredientId,
       measureFlOz: measurement.measureFlOz,
     });
-    // console.log(remaining);
   }
-  // myDrink.measurements.forEach(async (measurement) => {
-  //   console.log({
-  //     id: measurement.ingredientId,
-  //     measureFlOz: measurement.measureFlOz,
-  //   });
-  //   const remaining = await db.updateStock({
-  //     id: measurement.ingredientId,
-  //     measureFlOz: measurement.measureFlOz,
-  //   });
-  //   console.log(remaining);
-  // });
   return true;
 };

@@ -1,8 +1,9 @@
 import type { NextPage } from "next";
 import { gql } from "@apollo/client";
-import styles from "../styles/Home.module.css";
 import client from "../apollo/client";
 import { IngredientInventory } from "./api/graphql/resolvers/types";
+import InventoryComponent from "../components/Inventory";
+import PageContainer from "../components/PageContainer";
 
 const Inventory: NextPage<{ inventory: IngredientInventory[] }> = ({
   inventory,
@@ -10,23 +11,9 @@ const Inventory: NextPage<{ inventory: IngredientInventory[] }> = ({
   inventory: IngredientInventory[];
 }) => {
   return (
-    <div className={styles.container}>
-      <main className={styles.main}>
-        <h1 className={styles.title}>Inventory</h1>
-
-        <p className={styles.description}>What do we have?</p>
-
-        <div className={styles.grid}>
-          {inventory.map((ingredient) => (
-            <div className="card" key={ingredient.id}>
-              <p>id: {ingredient.id}</p>
-              <p>name: {ingredient.name}</p>
-              <p>stockFlOz: {ingredient.stockFlOz}</p>
-            </div>
-          ))}
-        </div>
-      </main>
-    </div>
+    <PageContainer title="Inventory" description="What do we have here?">
+      <InventoryComponent inventory={inventory} />;
+    </PageContainer>
   );
 };
 

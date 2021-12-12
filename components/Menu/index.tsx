@@ -1,11 +1,8 @@
-import { useEffect, useState } from "react";
-import { gql } from "@apollo/client";
+import { useState } from "react";
 import styles from "../../styles/Home.module.css";
-import { Drink, Menu } from "../../pages/api/graphql/resolvers/types";
-import client from "../../apollo/client";
-import { getInventory, getMenu, orderDrink } from "../../redux/thunks";
-import { useDispatch, useSelector } from "react-redux";
-import { AppState } from "../../redux/types";
+import { orderDrink } from "../../redux/thunks";
+import { useDispatch } from "react-redux";
+import { Drink, Menu } from "../../graphql/server/resolvers/types";
 
 const yummyStrings = ["Yum!", "Delicious!", "Tasty!", "More please!", "Enjoy!"];
 
@@ -33,18 +30,7 @@ const DrinkDisplay = ({ drink }: { drink: Drink }): JSX.Element => {
   );
 };
 
-const Menu = (): JSX.Element => {
-  const dispatch = useDispatch();
-  const menu = useSelector((state: AppState) => state.menu);
-
-  useEffect(() => {
-    if (!menu) {
-      dispatch(getMenu());
-    }
-  });
-
-  if (!menu) return <div>No Menu loaded</div>;
-
+const Menu = ({ menu }: { menu: Menu }): JSX.Element => {
   const { drinks } = menu;
   return (
     <div className={styles.grid}>

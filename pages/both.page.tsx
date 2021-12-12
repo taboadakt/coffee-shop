@@ -1,11 +1,11 @@
 import type { NextPage } from "next";
-import { gql } from "@apollo/client";
 import client from "../apollo/client";
-import { IngredientInventory, Menu } from "./api/graphql/resolvers/types";
+import { Menu } from "../graphql/server/resolvers/types";
 import InventoryComponent from "../components/Inventory";
 import MenuComponent from "../components/Menu";
 import PageContainer from "../components/PageContainer";
 import styles from "../styles/Home.module.css";
+import { GET_MENU } from "../graphql/client/requests";
 
 const ColumnContainer = ({
   children,
@@ -30,7 +30,7 @@ const Both: NextPage<{ menu: Menu }> = ({ menu }: { menu: Menu }) => {
     <PageContainer title="Both" description="Wow">
       <div style={{ display: "flex" }}>
         <ColumnContainer title="Menu">
-          <MenuComponent />
+          <MenuComponent menu={menu} />
         </ColumnContainer>
         <ColumnContainer title="Inventory">
           <InventoryComponent />
@@ -41,3 +41,15 @@ const Both: NextPage<{ menu: Menu }> = ({ menu }: { menu: Menu }) => {
 };
 
 export default Both;
+
+export async function getStaticProps() {
+  const { data } = await client.query({
+    query: GET_MENU,
+  });
+
+  return {
+    props: {
+      menu: data.menu,
+    },
+  };
+}

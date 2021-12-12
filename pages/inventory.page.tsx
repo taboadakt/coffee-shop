@@ -1,12 +1,12 @@
 import type { NextPage } from "next";
-import { IngredientInventory } from "./api/graphql/resolvers/types";
 import InventoryComponent from "../components/Inventory";
 import PageContainer from "../components/PageContainer";
+import { IngredientInventory } from "../graphql/server/resolvers/types";
 
 const Inventory: NextPage<{ inventory: IngredientInventory[] }> = () => {
   return (
     <PageContainer title="Inventory" description="What do we have here?">
-      <InventoryComponent />;
+      <InventoryComponent />
     </PageContainer>
   );
 };

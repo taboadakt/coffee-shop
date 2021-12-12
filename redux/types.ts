@@ -1,8 +1,5 @@
 import { Dispatch } from "@reduxjs/toolkit";
-import {
-  IngredientInventory,
-  Menu,
-} from "../pages/api/graphql/resolvers/types";
+import { IngredientInventory, Menu } from "../graphql/server/resolvers/types";
 
 export interface AppState {
   inventory?: IngredientInventory[];
@@ -17,7 +14,6 @@ export const initialState = {
 export enum ThunkActionTypes {
   getInventory = "getInventory",
   orderDrink = "orderDrink",
-  getMenu = "getMenu",
 }
 
 // non-experted type from redux-toolkit

@@ -1,8 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import {
-  IngredientInventory,
-  Menu,
-} from "../pages/api/graphql/resolvers/types";
+import { IngredientInventory, Menu } from "../graphql/server/resolvers/types";
 import { initialState } from "./types";
 
 const appStateSlice = createSlice({
@@ -14,6 +11,12 @@ const appStateSlice = createSlice({
     },
     setMenu(state, action: PayloadAction<Menu>) {
       state.menu = action.payload;
+    },
+    HYDRATE(state, action) {
+      return {
+        ...state, // use previous state
+        ...action.payload, // apply delta from hydration
+      };
     },
   },
 });

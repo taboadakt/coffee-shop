@@ -1,18 +1,9 @@
-import { gql } from "@apollo/client";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import client from "../apollo/client";
+import { GET_INVENTORY, ORDER_DRINK } from "../graphql/client/requests";
 import { setInventory, setMenu } from "./reducers";
 import { AsyncThunkConfig, ThunkActionTypes } from "./types";
 
-const GET_INVENTORY = gql`
-  query Inventory {
-    inventory {
-      id
-      name
-      stockFlOz
-    }
-  }
-`;
 export const getInventory = createAsyncThunk(
   ThunkActionTypes.getInventory,
   async (_: void, thunkAPI: AsyncThunkConfig) => {
@@ -24,47 +15,6 @@ export const getInventory = createAsyncThunk(
     }
   }
 );
-
-const GET_MENU = gql`
-  query Menu {
-    menu {
-      drinks {
-        id
-        name
-        price
-        measurements {
-          ingredientId
-          measureFlOz
-          variant {
-            id
-            name
-          }
-        }
-      }
-    }
-  }
-`;
-export const getMenu = createAsyncThunk(
-  ThunkActionTypes.getMenu,
-  async (_: void, thunkAPI: AsyncThunkConfig) => {
-    const { data, error } = await client.query({
-      query: GET_MENU,
-    });
-    if (data) {
-      thunkAPI.dispatch(setMenu(data.menu));
-    }
-  }
-);
-
-const ORDER_DRINK = gql`
-  mutation orderDrink($input: OrderDrinkInput) {
-    orderDrink(input: $input) {
-      id
-      name
-      stockFlOz
-    }
-  }
-`;
 
 export const orderDrink = createAsyncThunk(
   ThunkActionTypes.orderDrink,

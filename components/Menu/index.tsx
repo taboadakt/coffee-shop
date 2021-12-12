@@ -1,31 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { gql } from "@apollo/client";
 import styles from "../../styles/Home.module.css";
 import { Drink, Menu } from "../../pages/api/graphql/resolvers/types";
 import client from "../../apollo/client";
+import { getInventory, getMenu, orderDrink } from "../../redux/thunks";
+import { useDispatch, useSelector } from "react-redux";
+import { AppState } from "../../redux/types";
 
 const yummyStrings = ["Yum!", "Delicious!", "Tasty!", "More please!", "Enjoy!"];
 
-const handleDrink = async (id: string) => {
-  // TODO reduce from inventory
-  const result = await client.mutate({
-    variables: {
-      input: {
-        id,
-      },
-    },
-    mutation: gql`
-      mutation orderDrink($input: OrderDrinkInput) {
-        orderDrink(input: $input)
-      }
-    `,
-  });
-  console.log(result);
-};
-
 const DrinkDisplay = ({ drink }: { drink: Drink }): JSX.Element => {
+  const dispatch = useDispatch();
   const [displayName, setDisplayName] = useState(drink.name);
   const disabled = displayName !== drink.name;
+
+  const handleDrink = async (id: string) => {
+    dispatch(orderDrink(id));
+  };
   const handleClick = () => {
     if (!disabled) {
       handleDrink(drink.id);
@@ -42,7 +33,18 @@ const DrinkDisplay = ({ drink }: { drink: Drink }): JSX.Element => {
   );
 };
 
-const Menu = ({ menu }: { menu: Menu }): JSX.Element => {
+const Menu = (): JSX.Element => {
+  const dispatch = useDispatch();
+  const menu = useSelector((state: AppState) => state.menu);
+
+  useEffect(() => {
+    if (!menu) {
+      dispatch(getMenu());
+    }
+  });
+
+  if (!menu) return <div>No Menu loaded</div>;
+
   const { drinks } = menu;
   return (
     <div className={styles.grid}>

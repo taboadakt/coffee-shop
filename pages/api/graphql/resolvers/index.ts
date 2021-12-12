@@ -1,6 +1,6 @@
 import { getDb } from "../dataSources/dbConnection";
 import { menu, orderDrink } from "./menu";
-import { Context, UpdateStockInput } from "./types";
+import { IngredientInventory, UpdateStockInput } from "./types";
 
 const resolvers = {
   Query: {
@@ -11,9 +11,13 @@ const resolvers = {
     },
   },
   Mutation: {
-    updateStock: async (_: unknown, { input }: { input: UpdateStockInput }) => {
+    updateStock: async (
+      _: unknown,
+      { input }: { input: UpdateStockInput }
+    ): Promise<IngredientInventory[]> => {
       const db = await getDb();
-      return db.updateStock(input);
+      await db.updateStock(input);
+      return db.getInventory();
     },
     orderDrink,
   },

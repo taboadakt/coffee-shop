@@ -33,12 +33,6 @@ export type Drink = {
   measurements: Measurement[];
 };
 
-export interface Context {
-  dataSources: {
-    db: DB;
-  };
-}
-
 export type UpdateStockInput = {
   id: string;
   measureFlOz: number;

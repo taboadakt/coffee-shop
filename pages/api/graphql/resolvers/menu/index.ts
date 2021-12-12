@@ -1,5 +1,5 @@
 import { getDb } from "../../dataSources/dbConnection";
-import { Menu, Drink, OrderDrinkInput, Context } from "../types";
+import { Menu, Drink, OrderDrinkInput, IngredientInventory } from "../types";
 
 const drinks = (): Drink[] => {
   return [
@@ -41,7 +41,7 @@ export const menu = (): Menu => {
 export const orderDrink = async (
   _: unknown,
   { input }: { input: OrderDrinkInput }
-): Promise<boolean> => {
+): Promise<IngredientInventory[]> => {
   const db = await getDb();
   const myDrink = drinks().find(
     (drink: Drink): boolean => drink.id === input.id
@@ -56,5 +56,5 @@ export const orderDrink = async (
       measureFlOz: measurement.measureFlOz,
     });
   }
-  return true;
+  return db.getInventory();
 };

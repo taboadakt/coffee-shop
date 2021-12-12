@@ -7,8 +7,8 @@ export const typeDefs = gql`
   }
 
   type Mutation {
-    orderDrink(input: OrderDrinkInput): Boolean
-    updateStock(input: UpdateStockInput): UpdateStockPayload
+    orderDrink(input: OrderDrinkInput): [IngredientInventory]
+    updateStock(input: UpdateStockInput): [IngredientInventory]
   }
 
   input OrderDrinkInput {

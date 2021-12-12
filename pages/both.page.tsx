@@ -25,21 +25,15 @@ const ColumnContainer = ({
     {children}
   </div>
 );
-const Both: NextPage<{ inventory: IngredientInventory[]; menu: Menu }> = ({
-  inventory,
-  menu,
-}: {
-  inventory: IngredientInventory[];
-  menu: Menu;
-}) => {
+const Both: NextPage<{ menu: Menu }> = ({ menu }: { menu: Menu }) => {
   return (
     <PageContainer title="Both" description="Wow">
       <div style={{ display: "flex" }}>
-        <ColumnContainer title="Menu" className="menuLeft">
-          <MenuComponent menu={menu} />
+        <ColumnContainer title="Menu">
+          <MenuComponent />
         </ColumnContainer>
         <ColumnContainer title="Inventory">
-          <InventoryComponent inventory={inventory} />
+          <InventoryComponent />
         </ColumnContainer>
       </div>
     </PageContainer>
@@ -47,39 +41,3 @@ const Both: NextPage<{ inventory: IngredientInventory[]; menu: Menu }> = ({
 };
 
 export default Both;
-
-export async function getServerSideProps() {
-  const { data } = await client.query({
-    query: gql`
-      query Both {
-        inventory {
-          id
-          name
-          stockFlOz
-        }
-        menu {
-          drinks {
-            id
-            name
-            price
-            measurements {
-              ingredientId
-              measureFlOz
-              variant {
-                id
-                name
-              }
-            }
-          }
-        }
-      }
-    `,
-  });
-
-  return {
-    props: {
-      inventory: data.inventory,
-      menu: data.menu,
-    },
-  };
-}

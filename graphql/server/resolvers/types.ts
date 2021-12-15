@@ -42,6 +42,10 @@ export type OrderDrinkInput = {
   id: string;
 };
 
+export type InventoryItemInput = {
+  id: string;
+};
+
 export type UpdateStockPayload = {
   remainingStock: number;
 };

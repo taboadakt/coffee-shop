@@ -8,5 +8,20 @@
     "id": "cca81bc9-b597-4d4e-afa7-53701c2070b9",
     "name": "espresso",
     "stockFlOz": 100
+  },
+  {
+    "id": "f91e31b5-298f-4f3a-bd09-a0ba2f8b8e8b",
+    "name": "half and half",
+    "stockFlOz": 100
+  },
+  {
+    "id": "c60841db-58b2-4b25-a432-abc7fad2294e",
+    "name": "chocolate",
+    "stockFlOz": 100
+  },
+  {
+    "id": "cb64606b-3615-4377-986f-e8c8582f0548",
+    "name": "whipped cream",
+    "stockFlOz": 100
   }
 ]

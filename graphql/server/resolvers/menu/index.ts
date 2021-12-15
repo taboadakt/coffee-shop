@@ -1,37 +1,7 @@
 import { getDb } from "../../dataSources/dbConnection";
 import { Menu, Drink, OrderDrinkInput, IngredientInventory } from "../types";
+import { drinks } from "./drinks";
 
-const drinks = (): Drink[] => {
-  return [
-    {
-      id: "latte",
-      name: "Latte",
-      price: 8.99,
-      measurements: [
-        {
-          ingredientId: "31096b88-2113-4861-ab8b-18c786568f87",
-          measureFlOz: 0.7,
-          variant: {
-            id: "milkFoam",
-            name: "Milk foam",
-          },
-        },
-        {
-          ingredientId: "31096b88-2113-4861-ab8b-18c786568f87",
-          measureFlOz: 10,
-          variant: {
-            id: "steamedMilk",
-            name: "Steamed milk",
-          },
-        },
-        {
-          ingredientId: "cca81bc9-b597-4d4e-afa7-53701c2070b9",
-          measureFlOz: 2,
-        },
-      ],
-    },
-  ];
-};
 export const menu = (): Menu => {
   return {
     drinks: drinks(),

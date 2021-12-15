@@ -21,5 +21,5 @@ const appStateSlice = createSlice({
   },
 });
 
-export const { setInventory, setMenu } = appStateSlice.actions;
+export const { setInventory, setMenu, HYDRATE } = appStateSlice.actions;
 export default appStateSlice.reducer;

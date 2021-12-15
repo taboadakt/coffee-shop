@@ -12,6 +12,9 @@ const appStateSlice = createSlice({
     setMenu(state, action: PayloadAction<Menu>) {
       state.menu = action.payload;
     },
+    addToOutOfStock(state, action: PayloadAction<string>) {
+      state.outOfStock = [...state.outOfStock, action.payload];
+    },
     HYDRATE(state, action) {
       return {
         ...state, // use previous state
@@ -21,5 +24,6 @@ const appStateSlice = createSlice({
   },
 });
 
-export const { setInventory, setMenu, HYDRATE } = appStateSlice.actions;
+export const { setInventory, setMenu, addToOutOfStock, HYDRATE } =
+  appStateSlice.actions;
 export default appStateSlice.reducer;

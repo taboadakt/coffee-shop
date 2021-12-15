@@ -20,6 +20,8 @@ class DB extends DataSource {
     measureFlOz,
   }: UpdateStockInput): Promise<UpdateStockPayload> {
     const currentStock = await this.store.IngredientInventory.findByPk(id);
+    const updatedStock = currentStock.stockFlOz - measureFlOz;
+    if (updatedStock < 0) throw new Error("Not enough inventory!");
     await this.store.IngredientInventory.update(
       { stockFlOz: currentStock.stockFlOz - measureFlOz },
       { where: { id: id } }

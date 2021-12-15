@@ -4,11 +4,13 @@ import { IngredientInventory, Menu } from "../graphql/server/resolvers/types";
 export interface AppState {
   inventory?: IngredientInventory[];
   menu?: Menu;
+  outOfStock: string[];
 }
 
 export const initialState = {
   inventory: undefined,
   menu: undefined,
+  outOfStock: [],
 } as AppState;
 
 export enum ThunkActionTypes {

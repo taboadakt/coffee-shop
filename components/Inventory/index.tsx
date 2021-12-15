@@ -16,9 +16,9 @@ const Inventory = (): JSX.Element => {
 
   if (!inventory) return <div>No inventory</div>;
   return (
-    <div className={styles.grid}>
+    <div>
       {inventory.map((ingredient) => (
-        <div className="card" key={ingredient.id}>
+        <div className={styles.inventory} key={ingredient.id}>
           <p>id: {ingredient.id}</p>
           <p>name: {ingredient.name}</p>
           <p>stockFlOz: {ingredient.stockFlOz.toFixed(2)}</p>

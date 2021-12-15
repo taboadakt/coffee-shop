@@ -21,10 +21,12 @@ export const orderDrink = async (
   // Too lazy to set up queuing so we're going serial
   for (let i = 0; i < myDrink.measurements.length; i++) {
     const measurement = myDrink.measurements[i];
-    await db.updateStock({
+    const data = await db.updateStock({
       id: measurement.ingredientId,
       measureFlOz: measurement.measureFlOz,
     });
+    // we're assuming things here, just go with it
+    if (!data) throw new Error("Not enough inventory!");
   }
   return db.getInventory();
 };
